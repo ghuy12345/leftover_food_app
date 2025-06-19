@@ -11,10 +11,11 @@ import 'package:leftover_food_app/screens/receiver_form_screen.dart';
 The app's entry point. Sets up routing, themes, Firebase initialization, and opens the first screen (Splash or Home).
 */
 void main() async {
-  
+WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
 );
 
-runApp(MaterialApp());
+runApp(MaterialApp(home: ContactScreen(),));
 }
