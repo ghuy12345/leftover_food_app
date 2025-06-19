@@ -1,0 +1,3 @@
+/*
+Handles Firebase logic for submitting and retrieving food requests.
+*/

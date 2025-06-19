@@ -1,0 +1,3 @@
+/*
+Reusable text input with consistent styling and validation hooks.
+*/
