@@ -11,6 +11,8 @@ class ConfirmationScreen extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
 
+  ConfirmationScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
