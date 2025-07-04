@@ -4,6 +4,7 @@ Landing page with options like: “I'm a Donor” / “I'm a Receiver.”
 import 'package:flutter/material.dart';
 import 'package:leftover_food_app/screens/donor_form_screen.dart';
 import 'package:leftover_food_app/screens/receiver_form_screen.dart';
+import 'package:leftover_food_app/screens/admin_login_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
@@ -36,6 +37,16 @@ class HomeScreen extends StatelessWidget {
               },
               child: Text("Donate Food"),
             ),
+            // Admin Sign In
+            ElevatedButton(
+              child: Text("Admin Login"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => AdminLoginScreen()),
+                );
+              },
+            )
           ],
         ),
       ),
