@@ -3,6 +3,20 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+Future<void> ensureUserExists(String email, String name) async {
+  final userRef = FirebaseFirestore.instance.collection('users').doc(email);
+
+  final userSnapshot = await userRef.get();
+  if (!userSnapshot.exists) {
+    await userRef.set({
+      'email': email,
+      'name': name,
+      'active': true,
+      'createdAt': Timestamp.now(),
+    });
+  }
+}
+
 // donation submission function
 Future<bool> submitDonation({
   // pulls all of the data from the form
@@ -26,6 +40,9 @@ Future<bool> submitDonation({
   );
   return false;
 }
+ // ensures the user exists in the database
+  await ensureUserExists(email, name);
+
 
   if (donationDate.isBefore(DateTime(2010))) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -84,6 +101,19 @@ Future<bool> submitDonation({
       'notes': notes,
       'timestamp': DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
     });
+
+    // needs to save to admin dash
+    // Ensure user is added to 'users' collection as well
+    final userRef = FirebaseFirestore.instance.collection('users').doc(email);
+    final userSnapshot = await userRef.get();
+    if (!userSnapshot.exists) {
+      await userRef.set({
+        'email': email,
+        'name': name,
+        'isActive': true,
+        'createdAt': Timestamp.now(),
+      });
+    }
     return true;
   } catch (e) {
   print('Firebase submission error: $e'); 
@@ -116,6 +146,9 @@ Future<bool> submitReceiverRequest({
     return false;
   }
 
+  // ensures the user exists in the database
+  await ensureUserExists(email, name);
+
   if (!RegExp(r'^\d{10}$').hasMatch(number)) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text("Phone number must be exactly 10 digits (no '-' or spaces).")),
@@ -141,6 +174,18 @@ Future<bool> submitReceiverRequest({
       'notes': notes,
       'timestamp': DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
     });
+
+    // needs to save to admin dash
+    final userRef = FirebaseFirestore.instance.collection('users').doc(email);
+    final userSnapshot = await userRef.get();
+    if (!userSnapshot.exists) {
+      await userRef.set({
+        'email': email,
+        'name': name,
+        'isActive': true,
+        'createdAt': Timestamp.now(),
+      });
+    }
     return true;
   } catch (e) {
     print('Firebase submission error: $e');
