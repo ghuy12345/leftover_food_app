@@ -6,10 +6,10 @@ class EditUserDialog extends StatefulWidget {
   final String userId;
   // need this to receive user data and ID, a confusing constructor i needed help with
   const EditUserDialog({
-    Key? key,
+    super.key,
     required this.userData,
     required this.userId,
-  }) : super(key: key);
+  });
  // instance
   @override
   _EditUserDialogState createState() => _EditUserDialogState();
