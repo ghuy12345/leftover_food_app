@@ -31,8 +31,9 @@ Future<bool> submitDonation({
   required String source,
   required int quantity,
   required String notes,
+  bool isAdmin = false, // default to false, only true for admin submissions
 }) async {
-  final emailPattern = RegExp(r'^[^@]+@(gmail\.com|hotmail\.com|outlook\.com|yahoo\.com)$');
+  final emailPattern = RegExp(r'^[^@]+@(gmail\.com|hotmail\.com|outlook\.com|yahoo\.com|fsu\.edu)$');
   final cleanedEmail = email.trim().toLowerCase();
   if (!emailPattern.hasMatch(cleanedEmail)) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -100,6 +101,7 @@ Future<bool> submitDonation({
       'quantity': quantity,
       'notes': notes,
       'timestamp': DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+      'isAdmin': isAdmin,
     });
 
     // needs to save to admin dash
@@ -136,8 +138,9 @@ Future<bool> submitReceiverRequest({
   required String foodTypes,
   required int quantity,
   required String notes,
+  bool isAdmin = false,
 }) async {
-  final emailPattern = RegExp(r'^[^@]+@(gmail\.com|hotmail\.com|outlook\.com|yahoo\.com)$');
+  final emailPattern = RegExp(r'^[^@]+@(gmail\.com|hotmail\.com|outlook\.com|yahoo\.com|fsu\.edu)$');
   final cleanedEmail = email.trim().toLowerCase();
   if (!emailPattern.hasMatch(cleanedEmail)) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -173,6 +176,7 @@ Future<bool> submitReceiverRequest({
       'quantity': quantity,
       'notes': notes,
       'timestamp': DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+      'isAdmin': isAdmin,
     });
 
     // needs to save to admin dash

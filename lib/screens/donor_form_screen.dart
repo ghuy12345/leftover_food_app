@@ -6,11 +6,14 @@ import 'package:leftover_food_app/screens/confirmation_screen.dart';
 import 'package:leftover_food_app/functions.dart';
 
 class DonorFormScreen extends StatefulWidget {
-  const DonorFormScreen({super.key});
+  final bool isAdmin;
+
+  const DonorFormScreen({super.key, this.isAdmin = false});
 
   @override
-  DonorFormScreenState createState() => DonorFormScreenState();
+  State<DonorFormScreen> createState() => DonorFormScreenState();
 }
+
 
 class DonorFormScreenState extends State<DonorFormScreen> {
   final _formKey = GlobalKey<FormState>();
@@ -26,6 +29,10 @@ class DonorFormScreenState extends State<DonorFormScreen> {
   final _quantityController = TextEditingController();
   final _notesController = TextEditingController();
 
+
+  String? foodType;
+  String? source;
+
   @override
   void dispose() {
     _nameController.dispose();
@@ -40,6 +47,7 @@ class DonorFormScreenState extends State<DonorFormScreen> {
     _notesController.dispose();
     super.dispose();
   }
+
 
 // holy this was a pain , this is fully modified to work with the functions.dart file after many edits
   void _submitForm() async {
@@ -68,6 +76,7 @@ class DonorFormScreenState extends State<DonorFormScreen> {
         source: _sourceController.text.trim(),
         quantity: quantity,
         notes: _notesController.text.trim(),
+        isAdmin: widget.isAdmin,
       );
 
       if (success) {
