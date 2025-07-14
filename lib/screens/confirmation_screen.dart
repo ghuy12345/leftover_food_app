@@ -4,6 +4,12 @@ Displays a “Thank You” or “Success” message after submitting a form.
 /*
 Landing page with options like: “I'm a Donor” / “I'm a Receiver.”
 */
+/*
+Displays a “Thank You” or “Success” message after submitting a form.
+*/
+/*
+Landing page with options like: “I'm a Donor” / “I'm a Receiver.”
+*/
 import 'package:flutter/material.dart';
 import 'package:leftover_food_app/screens/home_screen.dart';
 
@@ -37,7 +43,9 @@ class ConfirmationScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Thankyou for your Submission!"),
+            Text("Thank you for your Submission! Saved to Database.", 
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushAndRemoveUntil(

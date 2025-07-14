@@ -35,7 +35,7 @@ Future<void> _login() async {
         if (!mounted) return;
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (_) => const AdminDashboardScreen()),
+          MaterialPageRoute(builder: (_) => AdminDashboardScreen()),
         );
       } else {
         await FirebaseAuth.instance.signOut(); // Kick them out if not admin
