@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:leftover_food_app/edit_user.dart';
 import 'package:leftover_food_app/edit_request.dart';
-import 'donor_form_screen.dart';
+import 'package:leftover_food_app/screens/analytics_tab.dart';
 
 class AdminDashboardScreen extends StatelessWidget {
   const AdminDashboardScreen({super.key});
@@ -11,35 +11,16 @@ class AdminDashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Wrap in a TabController to switch between Users and Requests
     return DefaultTabController(
-      length: 2,
+      length: 3, // 3 tabs: Users, Requests, Analytics
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Admin Dashboard'),
-          actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: ElevatedButton.icon(
-              icon: const Icon(Icons.add),
-              label: const Text('New Form'),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const DonorFormScreen(isAdmin: true),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                foregroundColor: Colors.white,
-              ),
-            ),
-          )
-        ],
-      
+ 
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Users'),
               Tab(text: 'Requests'),
+              Tab(text: 'Analytics'),
             ],
           ),
         ),
@@ -237,6 +218,9 @@ class AdminDashboardScreen extends StatelessWidget {
                 );
               },
             ),
+         
+            // Analytics Tab
+            const AnalyticsTab(),
           ],
         ),
       ),
